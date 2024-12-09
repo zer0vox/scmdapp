@@ -8,7 +8,7 @@ import "contracts/Retailer.sol";
 
 // Defining the contract
 
-contract supplychain111 is 
+contract supplychainall is 
 Manufacturer,
 Distributor,
 Retailer,
