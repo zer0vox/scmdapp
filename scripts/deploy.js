@@ -1,7 +1,7 @@
 const hre=require("hardhat");
 
 const main = async () => {
-  const Supplychain = await hre.ethers.getContractFactory("supplychain111");
+  const Supplychain = await hre.ethers.getContractFactory("supplychainall");
   const supplychain = await Supplychain.deploy();
 
   await supplychain.waitForDeployment();
@@ -22,6 +22,6 @@ const runMain = async () => {
 
 runMain();
 
-// 0x2AF85f07cE4a48d71E5ffeA18d1f72F0d80d5D78
+// 0xAD4F7EE29f7BAcD36DdA0c22221C8F8547281C3a
 
-// address used as second time deployment:  0xAaE630e3a986f1932BE7079E8e897cA15f7e989D
+// 0xEcDB040fDEE9a624Daae30d16DdAD0C9999fa03E
