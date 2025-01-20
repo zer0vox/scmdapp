@@ -1,5 +1,14 @@
 fetch item history
-multiple user testing
 showing blocks clearly
-implement qr
+-------------------------------------------------------
+<doubtful>
+implement qr(application becomes slow)
+------------------------------------------------
+<work under progress>
 integrated testing
+multiple user testing- cross device
+-----------------------------------------------------------
+<completed>
+single device multiple accounts testing 
+dry runs on remix ide
+integrated testing using hardhat 
