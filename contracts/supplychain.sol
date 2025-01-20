@@ -42,12 +42,12 @@ Consumer
         purchasedByDistributor, // 2
         shippedByManufacturer, // 3
         receivedByDistributor, //4
-        forSaleByDistributor, //6
-        purchasedByRetailer, //7
-        shippedByDistributor, //8
-        receivedByRetailer, //9
-        forSaleByRetailer, //10
-        purchaseByConsumer // 11
+        forSaleByDistributor, //5
+        purchasedByRetailer, //6
+        shippedByDistributor, //7
+        receivedByRetailer, //8
+        forSaleByRetailer, //9
+        purchaseByConsumer // 10
 
 
     }
