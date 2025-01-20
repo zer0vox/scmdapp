@@ -43,7 +43,7 @@ function App() {
     };
 
     const template = async () => {
-      const contractAddress = "0xAD4F7EE29f7BAcD36DdA0c22221C8F8547281C3a";
+      const contractAddress = "0xEcDB040fDEE9a624Daae30d16DdAD0C9909fa03E";
       const contractABI = abi.abi;
 
       const { ethereum } = window;
