@@ -1,21 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
+
 const ShippedItemByManufacturer = ({ contract, globalKey, globalName, entity }) => {
-  const [productCode, setProductCode] = useState();
- 
+  const [productCode, setProductCode] = useState("");
+  const [quantity, setQuantity] = useState(""); // Add state for quantity
   const [error, setError] = useState(null);
-  const [displayShip, setDisplayShip] = useState();
+  const [displayShip, setDisplayShip] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      if (!productCode) {
+      if (!productCode || !quantity) {
         setError("Product code and quantity are required");
         return;
       }
       console.log('line 16 done')
+      console.log("productCode:", productCode, "quantity:", quantity);
+
       const tx = await contract.shippedItemByManufacturer(
-        productCode
+        productCode,
+        quantity
       );
       await tx.wait();
       console.log('line 22 done')
@@ -41,8 +46,6 @@ const ShippedItemByManufacturer = ({ contract, globalKey, globalName, entity }) 
 
 
         try {
-
-
           // Update existing product
           console.log("Request Payload:", {
             id: existingProductManufacturer.data._id,
@@ -72,15 +75,10 @@ const ShippedItemByManufacturer = ({ contract, globalKey, globalName, entity }) 
 
           console.log('Data updated with id:', updateResult);
 
-
-
-        }
-
-        catch (err) {
+        } catch (err) {
           console.log(`we have an error ${err}`)
         }
-      }
-      catch (err) {
+      } catch (err) {
         console.log(`we have an error ${err}`)
       }
 
@@ -98,7 +96,7 @@ const ShippedItemByManufacturer = ({ contract, globalKey, globalName, entity }) 
 
   return (
     <>
-     <div className="bg-white relative flex flex-col pt-4 min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+      <div className="bg-white relative flex flex-col pt-4 min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         {/* Add Manufacturer */}
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
           {error && <p className="text-red-500">Error: {error}</p>}
@@ -122,6 +120,22 @@ const ShippedItemByManufacturer = ({ contract, globalKey, globalName, entity }) 
                   onChange={(e) => setProductCode(e.target.value)}
                   className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Product Code"
+                />
+              </div>
+              <div className="relative w-full mb-3">
+                <label
+                  className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="ship-quantity"
+                >
+                  Quantity
+                </label>
+                <input
+                  type="number"
+                  id="ship-quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Quantity"
                 />
               </div>
               <button className="custom-button w-full mt-3">
