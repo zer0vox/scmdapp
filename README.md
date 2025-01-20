@@ -1,4 +1,4 @@
-# Documentation for Supply Chain Project
+# SCM using Blcokchain
 
 The `supplychainall` smart contract is a Solidity-based implementation of a supply chain management system. This contract tracks the lifecycle of products as they move through the supply chain, from manufacturers to consumers. The following sections describe the structure, functionality, and purpose of each component within the contract.
 
