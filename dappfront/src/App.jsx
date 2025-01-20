@@ -18,7 +18,7 @@ import RetailerAnalysis from "./Pages/RetailerAnalysis";
 import PageNotFound from "./Pages/NotFound404";
 
 import { useState, useEffect } from "react";
-import abi from "./assets/contractfile/supplychain111.json";
+import abi from "./assets/contractfile/supplychainall.json";
 import { ethers } from "ethers";
 
 function App() {
