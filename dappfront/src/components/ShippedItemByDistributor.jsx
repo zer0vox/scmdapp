@@ -5,6 +5,7 @@ const ShippedItemByDistributor = ({ contract, globalName,
   entity }) => {
   const [productCode, setProductCode] = useState();
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(""); 
   const [displayShip, setDisplayShip] = useState();
 
   const handleSubmit = async (event) => {
@@ -119,10 +120,25 @@ const ShippedItemByDistributor = ({ contract, globalName,
                   placeholder="Product Code"
                 />
               </div>
+              <div className="relative w-full mb-3">
+                <label
+                  className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="ship-quantity"
+                >
+                  Quantity
+                </label>
+                <input
+                  type="number"
+                  id="ship-quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Quantity"
+                />
+              </div>
               <button className="custom-button w-full mt-3">
                 Ship Item
               </button>
-              <h4>{displayShip}</h4>
             </div>
           </form>
         </div>
