@@ -1,6 +1,5 @@
-//Test to briefly check the flow of consumer goods and check their states on Local Blockchain
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+import { expect } from "chai";
+import { ethers } from "hardhat";
 
 describe("Supply Chain Test Suite", function () {
   let manufacturer, distributor, retailer, consumer;
@@ -57,7 +56,7 @@ describe("Supply Chain Test Suite", function () {
     await consumerContract.addConsumer(consumer.address, "Consumer A", "Address A", 12345);
     expect(await consumerContract.getConsumer(consumer.address)).to.deep.include("Consumer A");
   });
-//testing entire 11 states in the project including all the roles
+
   it("Should allow manufacturer to produce and sell a product", async () => {
     // Produce item
     await supplyChain.connect(manufacturer).produceItemByManufacturer(

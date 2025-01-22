@@ -2,7 +2,9 @@
   "name": "hardhat-project",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
-    "hardhat": "^2.22.17"
+    "chai": "^5.1.2",
+    "hardhat": "^2.22.17",
+    "mocha": "^11.0.1"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
