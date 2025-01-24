@@ -42,7 +42,7 @@ function NavBar({ auth }) {
       >
         <div className="flex items-center justify-between w-11/12 mx-auto">
           <Link to="/" className="block max-w-[180px] cursor-pointer font-bold">
-            SCM Blockchain
+            SCM E-Portal
           </Link>
 
           <div className="hidden md:flex md:space-x-12">
