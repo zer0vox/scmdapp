@@ -1,8 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "chartjs-adapter-luxon";
 
+// Components
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+
+// Pages
 import Signup from "./Pages/Signup";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -11,28 +14,30 @@ import Distributor from "./Pages/Distributor";
 import DistributorAnalysis from "./Pages/DistributorAnalysis";
 import Manufacturer from "./Pages/Manufacturer";
 import ManufacturerAnalysis from "./Pages/ManufacturerAnalysis";
-
-
 import Retailer from "./Pages/Retailer";
 import RetailerAnalysis from "./Pages/RetailerAnalysis";
 import PageNotFound from "./Pages/NotFound404";
 
+// React hooks and libraries
 import { useState, useEffect } from "react";
 import abi from "./assets/contractfile/supplychainall.json";
 import { ethers } from "ethers";
 
 function App() {
+  // States for provider, signer, contract, account, authentication, and global data
   const [state, setState] = useState({
     provider: null,
     signer: null,
     contract: null,
   });
-  const [auth, setAuthenticated] = useState('noauth');
+  const [auth, setAuthenticated] = useState("noauth");
   const [account, setAccount] = useState("");
   const [contractInstance, setContractInstance] = useState(null);
   const [entity, setEntity] = useState("");
   const [globalName, setGlobalName] = useState("");
   const [globalKey, setGlobalKey] = useState("");
+
+  // Effect hook to initialize Ethereum connection and contract instance
   useEffect(() => {
     const handleAccountsChanged = (accounts) => {
       if (accounts.length > 0) {
@@ -49,6 +54,7 @@ function App() {
       const { ethereum } = window;
 
       try {
+        // Request account access
         const accounts = await ethereum.request({
           method: "eth_requestAccounts",
         });
@@ -58,31 +64,32 @@ function App() {
           setAccount(currentAccount);
           ethereum.on("accountsChanged", handleAccountsChanged);
 
+          // Set up provider, signer, and contract instance
           const provider = new ethers.providers.Web3Provider(ethereum);
           const signer = provider.getSigner();
-          const contract = new ethers.Contract(
-            contractAddress,
-            contractABI,
-            signer
-          );
+          const contract = new ethers.Contract(contractAddress, contractABI, signer);
 
-          console.log(contract);
+          console.log("Contract initialized:", contract);
           setState({ provider, signer, contract });
           setContractInstance(contract);
         } else {
           setAccount("Not Connected");
         }
       } catch (error) {
-        console.log("error = ", error);
-        // show an error message to the user
+        console.error("Error initializing contract:", error);
+        // Optionally display an error message to the user
       }
     };
 
     template();
   }, []);
+
   return (
     <Router>
+      {/* Navigation Bar */}
       <NavBar auth={auth} />
+
+      {/* Application Routes */}
       <Routes>
         <Route
           path="/"
@@ -112,7 +119,6 @@ function App() {
             />
           }
         />
-
         <Route
           path="/consumer"
           element={
@@ -161,7 +167,6 @@ function App() {
             />
           }
         />
-
         <Route
           path="/manufacturer/analysis"
           element={
@@ -198,8 +203,11 @@ function App() {
             />
           }
         />
+        {/* 404 Page Not Found */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+
+      {/* Footer */}
       <Footer />
     </Router>
   );

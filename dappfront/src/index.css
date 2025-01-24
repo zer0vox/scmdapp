@@ -2,73 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
+  /* Teal-Themed Button */
   .custom-button {
-    background-color: transparent;
-    color: #455a64;
-    font-weight: 600;
-    padding-top: 0.5rem;
-    padding-right: 1rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    border: 1px solid #3b82f6;
-    border-radius: 0.25rem;
+    @apply bg-transparent text-gray-700 font-semibold px-4 py-2 border border-teal-500 rounded-lg transition duration-300 ease-in-out;
 
     /* Hover styles */
     &:hover {
-      background-color: #3b82f6;
-      color: #fff;
-      border-color: transparent;
+      @apply bg-teal-500 text-white border-transparent shadow-md;
     }
-  }
-
-  .custom-field {
-    display: block;
-    color: #4a5568;
-    font-size: 0.875rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    width: 100%;
-    padding-top: 0.5rem;
-    padding-right: 0.75rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.75rem;
-    color: #4a5568;
-    line-height: 1.5;
-    outline: none;
 
     /* Focus styles */
     &:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+      @apply outline-none ring-2 ring-teal-400 ring-offset-2;
     }
   }
 
-  .custom-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 80%;
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-    border-radius: 0.5rem;
-    padding: 1.5rem 2rem 1rem;
-    margin-bottom: 1.5rem;
+  /* Teal-Themed Input Field */
+  .custom-field {
+    @apply block w-full px-4 py-2 text-gray-700 text-sm font-medium bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition duration-200 ease-in-out;
+
+    /* Placeholder styling */
+    &::placeholder {
+      @apply text-gray-400;
+    }
   }
 
-  .input-label{
-    align-self: flex-start;
-    color: #4a5568;
-    font-size: 0.875rem;
-    font-weight: 700;
-    margin-left: 0.3rem;
-    margin-bottom: 0.1rem;
-    margin-top: 0.1rem;
+  /* Teal-Themed Form Container */
+  .custom-form {
+    @apply flex flex-col items-center w-full max-w-lg bg-white shadow-lg rounded-lg p-6 mb-6 space-y-4;
+
+    /* Optional hover effect for the form */
+    &:hover {
+      @apply shadow-xl;
+    }
+  }
+
+  /* Teal-Themed Input Label */
+  .input-label {
+    @apply self-start text-gray-600 text-sm font-medium ml-1 mb-1 mt-1;
   }
 }

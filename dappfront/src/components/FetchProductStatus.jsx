@@ -12,7 +12,7 @@ const FetchProductStatus = ({ contract }) => {
         return;
       }
 
-      const result = await contract.fetchProductStatus(productCode);
+      const result = await contract.fetchItemtwo(productCode);
 
       // Convert Big Numbers to strings or numbers
       const formattedResult = {

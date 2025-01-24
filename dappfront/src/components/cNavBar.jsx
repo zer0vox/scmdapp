@@ -14,7 +14,7 @@ const CNavBar = () => {
           </li>
           <li>
             <Link to="/consumer" className="text-white hover:text-gray-300">
-              Consumer Page
+              Visit Shop
             </Link>
           </li>
           {/* Add more links as needed */}

@@ -1,6 +1,6 @@
 
 import FetchItem from "../components/Fetchitem";
-import FetchItemHistory from "../components/FetchItemHistroy";
+import FetchItemHistory from "../components/FetchItemHistory";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import FetchProductStatus from "../components/FetchProductStatus";
