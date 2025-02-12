@@ -111,7 +111,7 @@ const Distributor = ({
 
   return (
     <>
-      <div className="bg-gradient-to-r from-violet-400 via-violet-300 to-violet-500 pt-8 pb-4">
+      <div className="bg-gradient-to-r from-teal-400 via-teal-300 to-teal-500 pt-8 pb-4">
         <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
           <PurchaseItemByDistributor
             contract={contractInstance}
