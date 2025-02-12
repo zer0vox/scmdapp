@@ -5,65 +5,89 @@ const FetchItem = ({ contract }) => {
   const [error, setError] = useState(null);
   const [itemData, setItemData] = useState(null);
 
+  const itemStates = [
+    "Produced by Manufacturer",
+    "For Sale by Manufacturer",
+    "Purchased by Distributor",
+    "Shipped by Manufacturer",
+    "Received by Distributor",
+    "For Sale by Distributor",
+    "Purchased by Retailer",
+    "Shipped by Distributor",
+    "Received by Retailer",
+    "For Sale by Retailer",
+    "Purchased by Consumer"
+  ];
+
+  const formatAddress = (address) => {
+    return address === "0x0000000000000000000000000000000000000000" ? "N/A" : address;
+  };
+
   const handleFetchItem = async () => {
     try {
-      if (!productCode) {
-        setError('Product code is required');
+      if (!productCode.trim()) {
+        setError("Product code is required");
         return;
       }
+      setError(null); // Clear previous errors
 
-      const result = await contract.fetchItemtwo(productCode);
-      console.log(result)
-      const timestamp = parseInt(result[3]);
-      const date = new Date(timestamp * 1000);
-      const formattedDate = date.toDateString();
+      const fetchedData = await contract.fetchItemtwo(productCode);
+      console.log(fetchedData);
 
-      const modifiedResult = {
-        itemproductcode: result[0]?.toString() || '',
-        productNotes: result[1]?.toString() || '',
-        productPrice: result[2]?.toString() || '',
-        productDate: formattedDate,
-        distributorID: result[5]?.toString() || '',
-        retailerID: result[6]?.toString() || '',
-        manufacturerName: result[4]?.toString() || '',
+      if (!fetchedData || fetchedData.length < 11) {
+        throw new Error("Invalid response from contract");
+      }
+
+      const timestamp = parseInt(fetchedData[5]);
+      const date = isNaN(timestamp) ? "Invalid Date" : new Date(timestamp * 1000).toDateString();
+      const itemStateIndex = parseInt(fetchedData[6]);
+      const itemStateDescription = itemStates[itemStateIndex] || "Unknown State";
+
+      const formattedData = {
+        stockUnit: fetchedData[0]?.toString() || "N/A",
+        itemProductCode: fetchedData[1]?.toString() || "N/A",
+        productID: fetchedData[2]?.toString() || "N/A",
+        productNotes: fetchedData[3]?.toString() || "N/A",
+        productPrice: fetchedData[4]?.toString() || "N/A",
+        productDate: date,
+        itemState: itemStateDescription,
+        distributorID: formatAddress(fetchedData[7]?.toString()),
+        retailerID: formatAddress(fetchedData[8]?.toString()),
+        consumerID: formatAddress(fetchedData[9]?.toString()),
+        manufacturerName: fetchedData[10]?.toString() || "N/A",
+        manufacturerInformation: fetchedData[11]?.toString() || "N/A",
       };
-      console.log('halwa')
-      setItemData(modifiedResult);
 
+      setItemData(formattedData);
     } catch (error) {
-      setError(error.message || 'An error occurred while fetching item data.');
+      setError(error.message || "An error occurred while fetching item data.");
     }
   };
 
   return (
-    <>
-      <div className="mx-auto w-full flex flex-row justify-center">
-        <div className="custom-form">
-          {error && <p>Error: {error}</p>}
-          <input
-            type="text"
-            value={productCode}
-            onChange={(e) => setProductCode(e.target.value)}
-            placeholder="Product Code"
-            className="custom-field"
-          />
-          <button className="custom-button" onClick={handleFetchItem}>
-            Fetch Item
-          </button>
+    <div className="mx-auto w-full flex flex-row justify-center">
+      <div className="custom-form">
+        {error && <p className="text-red-500">Error: {error}</p>}
+        <input
+          type="text"
+          value={productCode}
+          onChange={(e) => setProductCode(e.target.value)}
+          placeholder="Product Code"
+          className="custom-field"
+        />
+        <button className="custom-button" onClick={handleFetchItem}>Fetch Item</button>
 
-          {
-            itemData && Object.keys(itemData).map((key) =>
-            (
-              <li className="text-center" key={key}>
-                <strong>{key}</strong>:<br />{itemData[key]}
+        {itemData && (
+          <ul className="text-center">
+            {Object.entries(itemData).map(([key, value]) => (
+              <li key={key}>
+                <strong>{key}</strong>: {value}
               </li>
-            )
-            )
-          }
-
-        </div>
+            ))}
+          </ul>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
