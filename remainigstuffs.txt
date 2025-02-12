@@ -1,14 +1,17 @@
-fetch item history
-showing blocks clearly
+Research Analysis graphs and upload the data set
+showing blocks clearly(Only UI implementation -- block is shown in status)
 -------------------------------------------------------
 <doubtful>
-implement qr(application becomes slow)
+implement qr(application becomes slow)----------**_instead implemented random unique code generator of lenght 5_**
 ------------------------------------------------
 <work under progress>
-integrated testing
-multiple user testing- cross device
+
+
 -----------------------------------------------------------
 <completed>
 single device multiple accounts testing 
 dry runs on remix ide
 integrated testing using hardhat 
+multiple user testing- cross device--not possible instead use multiple browser accounts for the roles
+integrated testing -- complete
+fetch item history 
